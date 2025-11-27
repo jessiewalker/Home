@@ -13,7 +13,78 @@
       href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,400;0,600;1,300;1,400;1,600&family=Muli:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
       rel="stylesheet"
     />
+
+  <style>
+  .accordion {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
+  }
+
+  .accordion-header {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .accordion-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .accordion-title h3 {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .accordion-logo {
+    height: 32px;
+    width: auto;
+  }
+
+  .accordion-icon {
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+  }
+
+  .accordion-item.open .accordion-icon {
+    transform: rotate(180deg);
+  }
+
+  .accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+
+  .accordion-item.open .accordion-panel {
+    max-height: 500px; /* tall enough for your text */
+  }
+
+  .accordion-panel p {
+    margin: 4px 0 10px;
+    line-height: 1.4;
+    font-size: 16px;
+  }
+
+  .accordion-title i {
+    font-size: 1.1rem;
+  }
+</style>
   </head>
+
   <body>
     <div class="spinner-container">
       <div class="circles">
@@ -122,61 +193,25 @@
           <div class="underline"></div>
         </div>
         <div class="services">
-        <style>
-  .accordion {
-    width: 100%;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
-  }
+        <div class="service" style="margin-bottom:20px;">
+            <div class="service-header" 
+                style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+                
+              <img 
+                src="https://blog.grabcad.com/wp-content/uploads/2022/06/nasa-logo-web-rgb.png"
+                alt="NASA Logo"
+                style="height:40px; width:auto;">
 
-  .accordion-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    padding: 10px 0;
-  }
+              <h3 style="margin:0; font-weight:600;">NASA-Funded Projects</h3>
+            </div>
 
-  .accordion-header h3 {
-    margin: 0;
-    font-weight: 600;
-  }
-
-  .accordion-content {
-    display: none;
-    padding-left: 2px;
-    line-height: 1.4;
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-
-  .accordion.open .accordion-content {
-    display: block;
-  }
-</style>
-
-<div class="accordion" id="nasaAccordion">
-  <div class="accordion-header" onclick="toggleAccordion('nasaAccordion')">
-    <img 
-      src="https://blog.grabcad.com/wp-content/uploads/2022/06/nasa-logo-web-rgb.png"
-      alt="NASA Logo"
-      style="height:40px; width:auto;">
-    <h3>NASA-Funded Projects</h3>
-  </div>
-
-  <div class="accordion-content">
-    • <strong>MyFIDES</strong>: Mycelial Federated Intrusion Detection System for aviation cybersecurity (SBIR Phase I).<br>
-    • <strong>NASA I-Corps Cohort</strong>: EFB cybersecurity customer discovery.<br>
-    • Applied research integrating AI, federated learning, and edge security for flight systems.
-  </div>
-</div>
-
-<script>
-  function toggleAccordion(id) {
-    document.getElementById(id).classList.toggle("open");
-  }
-</script>
-
+            <p class="service-text" 
+              style="line-height:1.4; margin:0; padding-left:2px; font-size:16px;">
+              • <strong>MyFIDES</strong>: Mycelial Federated Intrusion Detection System for aviation cybersecurity (SBIR Phase I).<br>
+              • <strong>NASA I-Corps Cohort</strong>: EFB cybersecurity customer discovery.<br>
+              • Applied research integrating AI, federated learning, and edge security for flight systems.
+            </p>
+          </div>
           <div class="service">
             <div class="service-header">
               <i class="fas fa-paint-roller"></i>
@@ -345,5 +380,25 @@
       crossorigin="anonymous"
     ></script>
     <script src="tilt.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const items = document.querySelectorAll(".accordion-item .accordion-header");
+
+    items.forEach((header) => {
+      header.addEventListener("click", () => {
+        const item = header.parentElement;
+
+        // If you want only one open at a time, uncomment below:
+        // document
+        //   .querySelectorAll(".accordion-item")
+        //   .forEach((i) => i !== item && i.classList.remove("open"));
+
+        item.classList.toggle("open");
+      });
+    });
+  });
+</script>
+
+
   </body>
 </html>
