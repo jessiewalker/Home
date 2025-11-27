@@ -122,25 +122,61 @@
           <div class="underline"></div>
         </div>
         <div class="services">
-        <div class="service" style="margin-bottom:20px;">
-            <div class="service-header" 
-                style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
-                
-              <img 
-                src="https://blog.grabcad.com/wp-content/uploads/2022/06/nasa-logo-web-rgb.png"
-                alt="NASA Logo"
-                style="height:40px; width:auto;">
+        <style>
+  .accordion {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
 
-              <h3 style="margin:0; font-weight:600;">NASA-Funded Projects</h3>
-            </div>
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 10px 0;
+  }
 
-            <p class="service-text" 
-              style="line-height:1.4; margin:0; padding-left:2px; font-size:16px;">
-              • <strong>MyFIDES</strong>: Mycelial Federated Intrusion Detection System for aviation cybersecurity (SBIR Phase I).<br>
-              • <strong>NASA I-Corps Cohort</strong>: EFB cybersecurity customer discovery.<br>
-              • Applied research integrating AI, federated learning, and edge security for flight systems.
-            </p>
-          </div>
+  .accordion-header h3 {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .accordion-content {
+    display: none;
+    padding-left: 2px;
+    line-height: 1.4;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .accordion.open .accordion-content {
+    display: block;
+  }
+</style>
+
+<div class="accordion" id="nasaAccordion">
+  <div class="accordion-header" onclick="toggleAccordion('nasaAccordion')">
+    <img 
+      src="https://blog.grabcad.com/wp-content/uploads/2022/06/nasa-logo-web-rgb.png"
+      alt="NASA Logo"
+      style="height:40px; width:auto;">
+    <h3>NASA-Funded Projects</h3>
+  </div>
+
+  <div class="accordion-content">
+    • <strong>MyFIDES</strong>: Mycelial Federated Intrusion Detection System for aviation cybersecurity (SBIR Phase I).<br>
+    • <strong>NASA I-Corps Cohort</strong>: EFB cybersecurity customer discovery.<br>
+    • Applied research integrating AI, federated learning, and edge security for flight systems.
+  </div>
+</div>
+
+<script>
+  function toggleAccordion(id) {
+    document.getElementById(id).classList.toggle("open");
+  }
+</script>
+
           <div class="service">
             <div class="service-header">
               <i class="fas fa-paint-roller"></i>
