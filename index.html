@@ -15,12 +15,16 @@
     />
 
   <style>
+  /* ❌ Remove the container constraints so .services layout still works */
+  /* (Delete the .accordion rule entirely)
   .accordion {
     max-width: 900px;
     margin: 0 auto;
   }
+  */
 
-  .accordion-item {
+  /* Apply accordion behavior only to the service cards */
+  .service.accordion-item {
     border-bottom: 1px solid #ddd;
     padding: 8px 0;
   }
@@ -59,7 +63,7 @@
     transition: transform 0.2s ease;
   }
 
-  .accordion-item.open .accordion-icon {
+  .service.accordion-item.open .accordion-icon {
     transform: rotate(180deg);
   }
 
@@ -69,8 +73,8 @@
     transition: max-height 0.25s ease;
   }
 
-  .accordion-item.open .accordion-panel {
-    max-height: 500px; /* tall enough for your text */
+  .service.accordion-item.open .accordion-panel {
+    max-height: 500px; /* adjust if needed */
   }
 
   .accordion-panel p {
@@ -83,6 +87,7 @@
     font-size: 1.1rem;
   }
 </style>
+
   </head>
 
   <body>
@@ -187,186 +192,190 @@
         </div>
       </section>
 
-              <section class="about-us" id="about-us">
-          <div class="section-header">
-            <h1 class="section-heading">About Us</h1>
-            <div class="underline"></div>
-          </div>
+    <section class="about-us" id="about-us">
+  <div class="section-header">
+    <h1 class="section-heading">About Us</h1>
+    <div class="underline"></div>
+  </div>
 
-          <div class="services accordion">
-            <!-- NASA -->
-            <div class="accordion-item open">
-              <button class="accordion-header">
-                <div class="accordion-title">
-                  <img
-                    src="https://www.nasa.gov/wp-content/uploads/2024/03/nasa-logo-web-rgb.png"
-                    alt="NASA Logo"
-                    class="accordion-logo"
-                  />
-                  <h3>NASA-Funded Projects</h3>
-                </div>
-                <span class="accordion-icon">&#9662;</span>
-              </button>
-              <div class="accordion-panel">
-                <p>
-                  • <strong>MyFIDES</strong>: Mycelial Federated Intrusion Detection
-                  System for aviation cybersecurity (SBIR Phase I).<br>
-                  • <strong>NASA I-Corps Cohort</strong>: EFB cybersecurity customer
-                  discovery.<br>
-                  • Applied research integrating AI, federated learning, and edge
-                  security for flight systems.
-                </p>
-              </div>
-            </div>
+  <!-- keep ONLY .services here so your house layout works again -->
+  <div class="services">
 
-            <!-- Exterior -->
-            <div class="accordion-item">
-              <button class="accordion-header">
-                <div class="accordion-title">
-                  <i class="fas fa-paint-roller"></i>
-                  <h3>Exterior</h3>
-                </div>
-                <span class="accordion-icon">&#9662;</span>
-              </button>
-              <div class="accordion-panel">
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Doloremque, officia! Necessitatibus delectus sed dicta corrupti
-                  voluptatibus, omnis eius vel ab magni nemo, incidunt esse! Quod!
-                </p>
-              </div>
-            </div>
-
-            <!-- Design -->
-            <div class="accordion-item">
-              <button class="accordion-header">
-                <div class="accordion-title">
-                  <i class="fas fa-pencil-alt"></i>
-                  <h3>Design</h3>
-                </div>
-                <span class="accordion-icon">&#9662;</span>
-              </button>
-              <div class="accordion-panel">
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Doloremque, officia! Necessitatibus delectus sed dicta corrupti
-                  voluptatibus, omnis eius vel ab magni nemo, incidunt esse! Quod!
-                </p>
-              </div>
-            </div>
-
-            <!-- Decoration -->
-            <div class="accordion-item">
-              <button class="accordion-header">
-                <div class="accordion-title">
-                  <i class="fas fa-paint-brush"></i>
-                  <h3>Decoration</h3>
-                </div>
-                <span class="accordion-icon">&#9662;</span>
-              </button>
-              <div class="accordion-panel">
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Doloremque, officia! Necessitatibus delectus sed dicta corrupti
-                  voluptatibus, omnis eius vel ab magni nemo, incidunt esse! Quod!
-                </p>
-              </div>
-            </div>
-
-            <!-- Planning -->
-            <div class="accordion-item">
-              <button class="accordion-header">
-                <div class="accordion-title">
-                  <i class="fas fa-ruler-combined"></i>
-                  <h3>Planning</h3>
-                </div>
-                <span class="accordion-icon">&#9662;</span>
-              </button>
-              <div class="accordion-panel">
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Doloremque, officia! Necessitatibus delectus sed dicta corrupti
-                  voluptatibus, omnis eius vel ab magni nemo, incidunt esse! Quod!
-                </p>
-              </div>
-            </div>
-
-            <!-- Execution -->
-            <div class="accordion-item">
-              <button class="accordion-header">
-                <div class="accordion-title">
-                  <i class="far fa-building"></i>
-                  <h3>Execution</h3>
-                </div>
-                <span class="accordion-icon">&#9662;</span>
-              </button>
-              <div class="accordion-panel">
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Doloremque, officia! Necessitatibus delectus sed dicta corrupti
-                  voluptatibus, omnis eius vel ab magni nemo, incidunt esse! Quod!
-                </p>
-              </div>
-            </div>
-
-            <!-- Optional: keep the image below the accordion -->
-            <div class="about-us-img-wrapper">
-              <img src="images/house.png" alt="House" />
-            </div>
-          </div>
-        </section>
-
-
-      <section class="team" id="team">
-        <div class="section-header">
-          <h1 class="section-heading">Our Team</h1>
-          <div class="underline"></div>
+    <!-- NASA -->
+    <div class="service accordion-item open">
+      <button class="accordion-header">
+        <div class="accordion-title">
+          <img
+            src="https://www.nasa.gov/wp-content/uploads/2024/03/nasa-logo-web-rgb.png"
+            alt="NASA Logo"
+            class="accordion-logo"
+          />
+          <h3>NASA-Funded Projects</h3>
         </div>
-        <div class="cards-wrapper">
-          <div class="card" data-tilt>
-            <div class="card-img-wrapper">
-              <img src="images/person-1.jpg" alt="CEO" />
-            </div>
-            <div class="card-info">
-              <h2>John Smith</h2>
-              <h3>CEO</h3>
-              <p>
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Asperiores, impedit!"
-              </p>
-              <button>Read More</button>
-            </div>
-          </div>
-          <div class="card" data-tilt>
-            <div class="card-img-wrapper">
-              <img src="images/person-2.jpg" alt="Designer" />
-            </div>
-            <div class="card-info">
-              <h2>Ann Brown</h2>
-              <h3>Designer</h3>
-              <p>
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Asperiores, impedit!"
-              </p>
-              <button>Read More</button>
-            </div>
-          </div>
-          <div class="card" data-tilt>
-            <div class="card-img-wrapper">
-              <img src="images/person-3.jpg" alt="Architect" />
-            </div>
-            <div class="card-info">
-              <h2>Mary Doe</h2>
-              <h3>Architect</h3>
-              <p>
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Asperiores, impedit!"
-              </p>
-              <button>Read More</button>
-            </div>
-          </div>
+        <span class="accordion-icon">&#9662;</span>
+      </button>
+      <div class="accordion-panel">
+        <p>
+          • <strong>MyFIDES</strong>: Mycelial Federated Intrusion Detection
+          System for aviation cybersecurity (SBIR Phase I).<br>
+          • <strong>NASA I-Corps Cohort</strong>: EFB cybersecurity customer
+          discovery.<br>
+          • Applied research integrating AI, federated learning, and edge
+          security for flight systems.
+        </p>
+      </div>
+    </div>
+
+    <!-- Exterior -->
+    <div class="service accordion-item">
+      <button class="accordion-header">
+        <div class="accordion-title">
+          <i class="fas fa-paint-roller"></i>
+          <h3>Exterior</h3>
         </div>
-      </section>
+        <span class="accordion-icon">&#9662;</span>
+      </button>
+      <div class="accordion-panel">
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Doloremque, officia! Necessitatibus delectus sed dicta corrupti
+          voluptatibus, omnis eius vel ab magni nemo, incidunt esse! Quod!
+        </p>
+      </div>
+    </div>
+
+    <!-- Design -->
+    <div class="service accordion-item">
+      <button class="accordion-header">
+        <div class="accordion-title">
+          <i class="fas fa-pencil-alt"></i>
+          <h3>Design</h3>
+        </div>
+        <span class="accordion-icon">&#9662;</span>
+      </button>
+      <div class="accordion-panel">
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Doloremque, officia! Necessitatibus delectus sed dicta corrupti
+          voluptatibus, omnis eius vel ab magni nemo, incidunt esse! Quod!
+        </p>
+      </div>
+    </div>
+
+    <!-- Decoration -->
+    <div class="service accordion-item">
+      <button class="accordion-header">
+        <div class="accordion-title">
+          <i class="fas fa-paint-brush"></i>
+          <h3>Decoration</h3>
+        </div>
+        <span class="accordion-icon">&#9662;</span>
+      </button>
+      <div class="accordion-panel">
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Doloremque, officia! Necessitatibus delectus sed dicta corrupti
+          voluptatibus, omnis eius vel ab magni nemo, incidunt esse! Quod!
+        </p>
+      </div>
+    </div>
+
+    <!-- Planning -->
+    <div class="service accordion-item">
+      <button class="accordion-header">
+        <div class="accordion-title">
+          <i class="fas fa-ruler-combined"></i>
+          <h3>Planning</h3>
+        </div>
+        <span class="accordion-icon">&#9662;</span>
+      </button>
+      <div class="accordion-panel">
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Doloremque, officia! Necessitatibus delectus sed dicta corrupti
+          voluptatibus, omnis eius vel ab magni nemo, incidunt esse! Quod!
+        </p>
+      </div>
+    </div>
+
+    <!-- Execution -->
+    <div class="service accordion-item">
+      <button class="accordion-header">
+        <div class="accordion-title">
+          <i class="far fa-building"></i>
+          <h3>Execution</h3>
+        </div>
+        <span class="accordion-icon">&#9662;</span>
+      </button>
+      <div class="accordion-panel">
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Doloremque, officia! Necessitatibus delectus sed dicta corrupti
+          voluptatibus, omnis eius vel ab magni nemo, incidunt esse! Quod!
+        </p>
+      </div>
+    </div>
+
+    <!-- Center image – stays where it was -->
+    <div class="about-us-img-wrapper">
+      <img src="images/house.png" alt="House" />
+    </div>
+  </div>
+</section>
+
+
+
+
+          <section class="team" id="team">
+            <div class="section-header">
+              <h1 class="section-heading">Our Team</h1>
+              <div class="underline"></div>
+            </div>
+            <div class="cards-wrapper">
+              <div class="card" data-tilt>
+                <div class="card-img-wrapper">
+                  <img src="images/person-1.jpg" alt="CEO" />
+                </div>
+                <div class="card-info">
+                  <h2>John Smith</h2>
+                  <h3>CEO</h3>
+                  <p>
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores, impedit!"
+                  </p>
+                  <button>Read More</button>
+                </div>
+              </div>
+              <div class="card" data-tilt>
+                <div class="card-img-wrapper">
+                  <img src="images/person-2.jpg" alt="Designer" />
+                </div>
+                <div class="card-info">
+                  <h2>Ann Brown</h2>
+                  <h3>Designer</h3>
+                  <p>
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores, impedit!"
+                  </p>
+                  <button>Read More</button>
+                </div>
+              </div>
+              <div class="card" data-tilt>
+                <div class="card-img-wrapper">
+                  <img src="images/person-3.jpg" alt="Architect" />
+                </div>
+                <div class="card-info">
+                  <h2>Mary Doe</h2>
+                  <h3>Architect</h3>
+                  <p>
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Asperiores, impedit!"
+                  </p>
+                  <button>Read More</button>
+                </div>
+              </div>
+            </div>
+          </section>
 
       <section class="contact" id="contact">
         <div class="contact-wrapper">
@@ -431,17 +440,12 @@
     items.forEach((header) => {
       header.addEventListener("click", () => {
         const item = header.parentElement;
-
-        // If you want only one open at a time, uncomment below:
-        // document
-        //   .querySelectorAll(".accordion-item")
-        //   .forEach((i) => i !== item && i.classList.remove("open"));
-
         item.classList.toggle("open");
       });
     });
   });
 </script>
+
 
 
   </body>
