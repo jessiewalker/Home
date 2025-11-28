@@ -16,12 +16,13 @@
 
 <style>
   /* ----------------------------------------------------------
-     Existing Accordion Styles (kept but enlarged)
+     Accordion styles (enlarged + fixed flow)
   ---------------------------------------------------------- */
 
   .service.accordion-item {
     border-bottom: 1px solid #ddd;
-    padding: 20px 0; /* more spacing */
+    padding: 20px 0;               /* more spacing */
+    display: block;                /* ensure block-level, not flex/inline */
   }
 
   .accordion-header {
@@ -44,16 +45,16 @@
   .accordion-title h3 {
     margin: 0;
     font-weight: 700;
-    font-size: 28px;  /* larger titles */
+    font-size: 28px;               /* larger titles */
   }
 
   .accordion-logo {
-    height: 48px;   /* bigger NASA image */
+    height: 48px;                  /* bigger NASA image */
     width: auto;
   }
 
   .accordion-icon {
-    font-size: 1.8rem; /* bigger arrow */
+    font-size: 1.8rem;             /* bigger arrow */
     transition: transform 0.25s ease;
   }
 
@@ -65,57 +66,59 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.35s ease;
+    position: static !important;   /* keep in normal flow */
+    display: block !important;     /* treat as a block element */
   }
 
   .service.accordion-item.open .accordion-panel {
-    max-height: 800px; /* more room */
+    max-height: 1000px;            /* plenty of room for text */
   }
 
   .accordion-panel p {
     margin: 8px 0 12px;
     line-height: 1.7;
-    font-size: 22px;  /* bigger content text */
+    font-size: 22px;               /* bigger content text */
   }
 
   .accordion-title i {
-    font-size: 1.8rem; /* larger icons */
+    font-size: 1.8rem;             /* larger icons */
   }
 
 
   /* ----------------------------------------------------------
-     LAYOUT + IMAGE SIZE IMPROVEMENTS
+     Layout + image size
   ---------------------------------------------------------- */
 
   .about-us {
-    padding: 4rem 0 5rem; /* less wasted vertical space */
+    padding: 4rem 0 5rem;
   }
 
   .section-heading {
-    font-size: 48px;  /* bigger “About Us” */
+    font-size: 48px;
     font-weight: 700;
   }
 
   /* Main grid layout */
   .services {
-    max-width: 1450px;         /* allow everything to expand wider */
+    max-width: 1450px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 0.8fr 1fr;
-    grid-auto-rows: auto;      /* rows grow with content */
+    grid-auto-rows: auto;          /* rows grow with content */
     column-gap: 5rem;
     row-gap: 2.5rem;
-    align-items: start;        /* top-align items so they stack cleanly */
+    align-items: start;            /* top-align items */
   }
 
-  /* LEFT column: NASA, Exterior, Design (rows auto) */
+  /* LEFT column: NASA, Exterior, Design */
   .services .service:nth-of-type(1),
   .services .service:nth-of-type(2),
   .services .service:nth-of-type(3) {
     grid-column: 1;
-    grid-row: auto;
+    grid-row: auto;                /* rows assigned automatically */
   }
 
-  /* RIGHT column: Decoration, Planning, Execution (rows auto) */
+  /* RIGHT column: Decoration, Planning, Execution */
   .services .service:nth-of-type(4),
   .services .service:nth-of-type(5),
   .services .service:nth-of-type(6) {
@@ -126,7 +129,7 @@
   /* Center image spans all rows */
   .about-us-img-wrapper {
     grid-column: 2;
-    grid-row: 1 / -1;      /* from first to last row */
+    grid-row: 1 / -1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,7 +137,7 @@
 
   .about-us-img-wrapper img {
     width: 100%;
-    max-width: 740px;      /* large central graphic */
+    max-width: 740px;
   }
 </style>
 
