@@ -22,6 +22,7 @@
   .service.accordion-item {
     border-bottom: 1px solid #ddd;
     padding: 20px 0; /* more spacing */
+    overflow: visible; /* let the open panel expand naturally */
   }
 
   .accordion-header {
@@ -61,22 +62,17 @@
     transform: rotate(180deg);
   }
 
+  /* Accordion panel: height is controlled via JS (scrollHeight) */
   .accordion-panel {
+    position: relative;
+    display: block;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.35s ease;
-    /* optional: uncomment for a smoother open/close with padding
+    /* if you want padding animation too, uncomment and adjust:
     padding-top: 0;
     padding-bottom: 0;
     transition: max-height 0.35s ease, padding-top 0.35s ease, padding-bottom 0.35s ease;
-    */
-  }
-
-  .service.accordion-item.open .accordion-panel {
-    max-height: 800px; /* more room */
-    /* optional (if you use the padding lines above)
-    padding-top: 8px;
-    padding-bottom: 12px;
     */
   }
 
@@ -89,7 +85,6 @@
   .accordion-title i {
     font-size: 1.8rem; /* larger icons */
   }
-
 
   /* ----------------------------------------------------------
      LAYOUT + IMAGE SIZE IMPROVEMENTS
@@ -136,6 +131,7 @@
     max-width: 740px;  /* HUGE upgrade */
   }
 </style>
+
 
   </head>
 
@@ -492,7 +488,7 @@
       const header = item.querySelector('.accordion-header');
       const panel  = item.querySelector('.accordion-panel');
 
-      // Ensure any item marked .open in HTML starts fully expanded
+      // If item is marked open in HTML, start expanded
       if (item.classList.contains('open')) {
         panel.style.maxHeight = panel.scrollHeight + 'px';
       }
@@ -510,7 +506,7 @@
           }
         });
 
-        // Toggle current item
+        // Toggle current
         if (isOpen) {
           item.classList.remove('open');
           panel.style.maxHeight = 0;
@@ -518,14 +514,14 @@
           item.classList.add('open');
           panel.style.maxHeight = panel.scrollHeight + 'px';
 
-          // small delay to stabilize height after fonts/layout settle
+          // small delay helps if fonts/layout shift
           setTimeout(() => {
             panel.style.maxHeight = panel.scrollHeight + 'px';
           }, 50);
         }
       });
 
-      // Keep height correct on resize
+      // Keep height correct on window resize
       window.addEventListener('resize', () => {
         if (item.classList.contains('open')) {
           panel.style.maxHeight = panel.scrollHeight + 'px';
@@ -534,9 +530,6 @@
     });
   });
 </script>
-
-
-
 
   </body>
 </html>
