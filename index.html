@@ -65,10 +65,19 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.35s ease;
+    /* optional: uncomment for a smoother open/close with padding
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: max-height 0.35s ease, padding-top 0.35s ease, padding-bottom 0.35s ease;
+    */
   }
 
   .service.accordion-item.open .accordion-panel {
     max-height: 800px; /* more room */
+    /* optional (if you use the padding lines above)
+    padding-top: 8px;
+    padding-bottom: 12px;
+    */
   }
 
   .accordion-panel p {
@@ -127,6 +136,7 @@
     max-width: 740px;  /* HUGE upgrade */
   }
 </style>
+
   </head>
 
   <body>
@@ -354,6 +364,7 @@
         </p>
       </div>
     </div>
+
     <!-- Center image – stays where it was -->
     <div class="about-us-img-wrapper">
       <img src="images/house.gif" alt="House" />
@@ -361,6 +372,7 @@
 
   </div>
 </section>
+
 
 
 
@@ -473,17 +485,56 @@
     ></script>
     <script src="tilt.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const items = document.querySelectorAll(".accordion-item .accordion-header");
+  document.addEventListener('DOMContentLoaded', function () {
+    const items = document.querySelectorAll('.service.accordion-item');
 
-    items.forEach((header) => {
-      header.addEventListener("click", () => {
-        const item = header.parentElement;
-        item.classList.toggle("open");
+    items.forEach(item => {
+      const header = item.querySelector('.accordion-header');
+      const panel  = item.querySelector('.accordion-panel');
+
+      // Ensure any item marked .open in HTML starts fully expanded
+      if (item.classList.contains('open')) {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+
+      header.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+
+        // Close all other items
+        items.forEach(other => {
+          if (other === item) return;
+          if (other.classList.contains('open')) {
+            other.classList.remove('open');
+            const otherPanel = other.querySelector('.accordion-panel');
+            otherPanel.style.maxHeight = 0;
+          }
+        });
+
+        // Toggle current item
+        if (isOpen) {
+          item.classList.remove('open');
+          panel.style.maxHeight = 0;
+        } else {
+          item.classList.add('open');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+
+          // small delay to stabilize height after fonts/layout settle
+          setTimeout(() => {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          }, 50);
+        }
+      });
+
+      // Keep height correct on resize
+      window.addEventListener('resize', () => {
+        if (item.classList.contains('open')) {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
       });
     });
   });
 </script>
+
 
 
 
