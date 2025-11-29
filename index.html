@@ -243,33 +243,32 @@
     <div class="underline"></div>
   </div>
 
-  <!-- keep ONLY .services here so your house layout works again -->
   <div class="services">
-
-    <!-- NASA -->
-    <div class="service accordion-item open">
-      <button class="accordion-header">
-        <div class="accordion-title">
-          <img
-            src="https://www.nasa.gov/wp-content/uploads/2024/03/nasa-logo-web-rgb.png"
-            alt="NASA Logo"
-            class="accordion-logo"
-          />
-          <h3>NASA-Funded Projects</h3>
-        </div>
-        <span class="accordion-icon">&#9662;</span>
-      </button>
-      <div class="accordion-panel">
-        <p>
-          • <strong>MyFIDES</strong>: Mycelial Federated Intrusion Detection
-          System for aviation cybersecurity (SBIR Phase I).<br>
-          • <strong>NASA I-Corps Cohort</strong>: EFB cybersecurity customer
-          discovery.<br>
-          • Applied research integrating AI, federated learning, and edge
-          security for flight systems.
-        </p>
+  <div class="service accordion-item open">
+    <button class="accordion-header">
+      <div class="accordion-title">
+        <img
+          src="https://www.nasa.gov/wp-content/uploads/2024/03/nasa-logo-web-rgb.png"
+          alt="NASA Logo"
+          class="accordion-logo"
+        />
+        <h3>NASA-Funded Projects</h3>
       </div>
+      <span class="accordion-icon">&#9662;</span>
+    </button>
+    <div class="accordion-panel">
+      <p>
+        • <strong>MyFIDES</strong>: Mycelial Federated Intrusion Detection
+        System for aviation cybersecurity (SBIR Phase I).<br>
+        • <strong>NASA I-Corps Cohort</strong>: EFB cybersecurity customer
+        discovery.<br>
+        • Applied research integrating AI, federated learning, and edge
+        security for flight systems.
+      </p>
     </div>
+  </div>
+</div>
+
 
     <!-- Exterior -->
     <div class="service accordion-item">
@@ -481,50 +480,65 @@
     ></script>
     <script src="tilt.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const items = document.querySelectorAll('.service.accordion-item');
+  function animateHeight(element, from, to, duration, onComplete) {
+    const start = performance.now();
+
+    function frame(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1); // 0 → 1
+      const value = from + (to - from) * progress;
+
+      element.style.height = value + 'px';
+
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        if (onComplete) onComplete();
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.accordion-item');
 
     items.forEach(item => {
       const header = item.querySelector('.accordion-header');
-      const panel  = item.querySelector('.accordion-panel');
+      const panel = item.querySelector('.accordion-panel');
 
-      // If item is marked open in HTML, start expanded
+      // Ensure panels start with controlled height
+      panel.style.overflow = 'hidden';
+
       if (item.classList.contains('open')) {
-        panel.style.maxHeight = panel.scrollHeight + 'px';
+        // Open by default: set to natural height
+        const fullHeight = panel.scrollHeight;
+        panel.style.height = fullHeight + 'px';
+      } else {
+        panel.style.height = '0px';
       }
 
       header.addEventListener('click', () => {
         const isOpen = item.classList.contains('open');
+        const currentHeight = panel.getBoundingClientRect().height;
+        const fullHeight = panel.scrollHeight;
+        const duration = 250; // ms
 
-        // Close all other items
-        items.forEach(other => {
-          if (other === item) return;
-          if (other.classList.contains('open')) {
-            other.classList.remove('open');
-            const otherPanel = other.querySelector('.accordion-panel');
-            otherPanel.style.maxHeight = 0;
-          }
-        });
-
-        // Toggle current
-        if (isOpen) {
-          item.classList.remove('open');
-          panel.style.maxHeight = 0;
+        if (!isOpen) {
+          // Opening: 0 → scrollHeight
+          animateHeight(panel, 0, fullHeight, duration, () => {
+            panel.style.height = 'auto'; // allow natural resizing
+            item.classList.add('open');
+          });
         } else {
-          item.classList.add('open');
-          panel.style.maxHeight = panel.scrollHeight + 'px';
+          // Closing: current → 0
+          // Set explicit height first to avoid jump from 'auto'
+          panel.style.height = currentHeight + 'px';
 
-          // small delay helps if fonts/layout shift
-          setTimeout(() => {
-            panel.style.maxHeight = panel.scrollHeight + 'px';
-          }, 50);
-        }
-      });
-
-      // Keep height correct on window resize
-      window.addEventListener('resize', () => {
-        if (item.classList.contains('open')) {
-          panel.style.maxHeight = panel.scrollHeight + 'px';
+          animateHeight(panel, currentHeight, 0, duration, () => {
+            panel.style.height = '0px';
+            item.classList.remove('open');
+          });
         }
       });
     });
